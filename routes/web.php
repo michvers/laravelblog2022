@@ -41,9 +41,11 @@ Route::group(['prefix'=>'admin', 'middleware'=>'admin'], function () {
     Route::get('users/restore/{user}', 'App\Http\Controllers\AdminUsersController@restore')->name('users.restore');
 });
 
-Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function (){
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function (){
 
     Route::get('', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('homebackend');
     Route::resource('photos', App\Http\Controllers\AdminPhotosController::class);
-
+    Route::resource('media', App\Http\Controllers\AdminMediasController::class);
+    Route::resource('posts', App\Http\Controllers\AdminPostsController::class);
+    Route::resource('categories', App\Http\Controllers\AdminCategoriesController::class);
 });

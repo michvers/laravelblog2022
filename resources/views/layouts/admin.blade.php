@@ -103,6 +103,33 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFoto"
+               aria-expanded="true" aria-controls="collapseFoto">
+                <i class="fas fa-fw fa-images"></i>
+                <span>Media</span>
+            </a>
+            <div id="collapseFoto" class="collapse" aria-labelledby="headingFoto" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Media actions:</h6>
+                    <a class="collapse-item" href="{{route('media.index')}}"><i class="fa fa-camera-retro me-2"></i>All </a>
+                    <a class="collapse-item" href="{{route('media.create')}}"><i class="fa fa-plus-circle me-2"></i>Add new images</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePosts"
+               aria-expanded="true" aria-controls="collapsePosts">
+                <i class="fas fa-images"></i>
+                <span>Photos</span>
+            </a>
+            <div id="collapsePosts" class="collapse" aria-labelledby="collapsePosts" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{route('posts.index')}}">All posts</a>
+                    <a class="collapse-item" href="{{route('posts.create')}}">Create Post</a>
+                </div>
+            </div>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
