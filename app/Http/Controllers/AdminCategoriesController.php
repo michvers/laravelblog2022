@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class AdminCategoriesController extends Controller
@@ -14,6 +16,7 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -81,4 +84,10 @@ class AdminCategoriesController extends Controller
     {
         //
     }
+    public function category(Category $category){
+        $categories = Category::all();
+        $posts = Post::all();
+        return view('category', compact('categories', 'posts'));
+    }
+
 }
