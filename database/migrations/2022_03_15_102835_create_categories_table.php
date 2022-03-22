@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
+            //$table->softDeletes();
         });
-        Schema::create('post_category', function (Blueprint $table){
+        Schema::create('category_post', function (Blueprint $table){
             $table->id();
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('category_id');
@@ -26,7 +27,6 @@ return new class extends Migration
             $table->unique(['post_id', 'category_id']);
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-
         });
     }
 

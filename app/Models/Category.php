@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    //protected $guarded=[];
+    protected $fillable = [
+        'name'
+    ];
 
     public function posts(){
-        return $this->belongsToMany(Post::class, 'post_category');
+        return $this->belongsToMany(Post::class, 'category_post');
     }
 }

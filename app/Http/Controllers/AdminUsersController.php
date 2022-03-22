@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UsersSoftDelete;
 use App\Http\Requests\UsersEditRequest;
 use App\Http\Requests\UsersRequest;
 use App\Models\Photo;
@@ -32,7 +33,7 @@ class AdminUsersController extends Controller
         //dd($users);
         //$users = DB::table('users')->get();  //query builder
 
-        $users = User::withTrashed()->paginate(15);
+        $users = User::withTrashed()->with(['photo', 'roles'])->withTrashed()->filter(request(['search']))->paginate(15);
 
         //dd($users);
         //return view('admin.users.index', ['users' => $users]);
@@ -127,7 +128,7 @@ class AdminUsersController extends Controller
             $input = $request->except('password');
         }else{
             $input = $request->all;
-            $input['password'] = Hash::make($request['passowrd']);
+            $input['password'] = Hash::make($request['password']);
         }
         /**photo overschrijven**/
         if($file = $request->file('photo_id')){
@@ -155,6 +156,7 @@ class AdminUsersController extends Controller
         //
         //User::findOrFail($id)->delete();
         $user = User::findOrFail($id);
+        UsersSoftDelete::dispatch($user);
         $user->delete();
 
         Session::flash('user_message', $user->name . ' was deleted!');
