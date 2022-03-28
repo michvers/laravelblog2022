@@ -21,10 +21,10 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Id</th>
+                <th>@sortablelink('id')</th>
                 <th>Photo</th>
-                <th>Name</th>
-                <th>E-mail</th>
+                <th>@sortablelink('name')</th>
+                <th>@sortablelink('email')</th>
                 <th>Role</th>
                 <th>Active</th>
                 <th>Created</th>
@@ -72,6 +72,6 @@
             </tbody>
         </table>
     </div>
-    {{$users->links()}}
+    {{$users->appends(\Request::except('page'))->links()}}
 
 @endsection

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostComment extends Model
+class Comment extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -24,5 +24,8 @@ class PostComment extends Model
     }
     public function postcommentreplies(){
         //return $this->hasMany(PostCommentReply::class);
+    }
+    public function replies(){
+        return $this->hasMany(Reply::class);
     }
 }

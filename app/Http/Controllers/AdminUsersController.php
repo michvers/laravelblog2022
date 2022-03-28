@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
 
 class AdminUsersController extends Controller
 {
@@ -33,7 +34,7 @@ class AdminUsersController extends Controller
         //dd($users);
         //$users = DB::table('users')->get();  //query builder
 
-        $users = User::withTrashed()->with(['photo', 'roles'])->withTrashed()->filter(request(['search']))->paginate(15);
+        $users = User::withTrashed()->with(['photo', 'roles'])->withTrashed()->filter(request(['search']))->sortable()->paginate(15);
 
         //dd($users);
         //return view('admin.users.index', ['users' => $users]);
@@ -77,7 +78,14 @@ class AdminUsersController extends Controller
         /**photo opslaan**/
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
-            $file->move('img', $name);
+            Image::make($file)
+                ->resize(300,300, function($constraint){
+                    $constraint->aspectRatio();
+                })
+                ->crop(200, 200)
+                //->insert(public_path('/img/watermark.png'), 'bottom-right', 20, 20) /**met watermark**/
+                ->save(public_path('/img/' . $name));
+            //$file->move('img', $name);
             $photo = Photo::create(['file'=>$name]);
             $user->photo_id = $photo->id;
         }

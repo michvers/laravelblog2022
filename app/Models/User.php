@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kyslik\ColumnSortable\Sortable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Sortable;
     use softDeletes;
 
     /**
@@ -26,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'photo_id',
         'password',    ];
+    public $sortable = ['id','name', 'email'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -61,6 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function posts(){
         return $this->hasMany(Post::class);
+    }
+    public function postcomments(){
+        return $this->hasMany(Comment::class);
     }
 
 

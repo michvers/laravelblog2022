@@ -142,6 +142,18 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCommentReply"
+               aria-expanded="true" aria-controls="collapseCommentReply">
+                <i class="fas fa-images"></i>
+                <span>Comment Replies</span>
+            </a>
+            <div id="collapseCommentReply" class="collapse" aria-labelledby="collapseCommentReply" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{route('replies.index')}}">All Comment Replies</a>
+                </div>
+            </div>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">

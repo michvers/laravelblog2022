@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class AdminCategoriesController extends Controller
+class AdminPostsCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -85,9 +85,10 @@ class AdminCategoriesController extends Controller
         //
     }
     public function category(Category $category){
-        $categories = Category::all();
-        $posts = Post::all();
-        return view('category', compact('categories', 'posts'));
+        $allCategories = Category::all();
+        $category->load(['posts.categories', 'posts.photo']);
+        $posts = $category->posts()->with('categories', 'photo')->paginate(9);
+        return view('category', compact('category', 'posts', 'allCategories'));
     }
 
 }

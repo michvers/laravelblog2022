@@ -23,7 +23,7 @@
                                             <a class="dropdown-item" href="contact.html">Contact</a>
                                         </div>
                                     </li>
-                                    @foreach($categories as $category)
+                                    @foreach($allCategories as $category)
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{url('category/' . $category->name)}}">{{$category->name}}</a>
                                         </li>
@@ -77,14 +77,13 @@
         <div class="container">
             <div class="row">
                 @foreach($posts as $post)
-                    <div class="col-12 col-md-4">
-                            {{--@if($category->name == $post->categories)--}}
+                    <div class="col-12 col-md-4 mt-auto">
                         <!-- Gazette Welcome Post -->
                         <div class="gazette-welcome-post">
                             <!-- Post Tag -->
                             <div class="gazette-post-tag">
-                                @foreach($post->categories as $category)
-                                    <a href="#">{{$category->name}}</a>
+                                @foreach($post->categories as $postcategories)
+                                    <a href="{{route('category.category', $postcategories->name)}}">{{$postcategories->name}}</a>
                                 @endforeach
                             </div>
                             <h2 class="font-pt">{{$post->title}}</h2>
@@ -101,34 +100,17 @@
                             <!-- Reading More -->
                             <div class="post-continue-reading-share mt-30">
                                 <div class="post-continue-btn">
-                                    <a href="{{url('post/' . $post->slug)}}" class="font-pt">Continue Reading <i class="fa fa-chevron-right"
+                                    <a href="{{route('home.post')}}" class="font-pt">Continue Reading <i class="fa fa-chevron-right"
                                                                                     aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
-                                {{--@endif--}}
+
                     </div>
                 @endforeach
             </div>
-
             <div class="row">
-                <div class="col-12">
-                    <div class="gazette-pagination-area">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next"><i
-                                            class="fa fa-angle-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+                {{$posts->render()}}
             </div>
         </div>
     </section>

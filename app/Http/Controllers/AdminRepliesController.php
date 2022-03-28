@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-class AdminPostCommentsController extends Controller
+class AdminRepliesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,9 @@ class AdminPostCommentsController extends Controller
     public function index()
     {
         //
-        $comments = Comment::with(['user', 'post'])->latest()->paginate(10);
-        return view('admin.comments.index', compact('comments'));
+        $replies = Reply::with(['user', 'post', 'comment'])->latest()->paginate(10);
+        $comments = Comment::all();
+        return view('admin.comments.replies.index', compact('replies', 'comments'));
     }
 
     /**
@@ -42,16 +44,15 @@ class AdminPostCommentsController extends Controller
         //
         if($user = Auth::user()){
             $data = [
-                'post_id'=>$request->post_id,
                 'body'=>$request->body,
                 'user_id'=>$user->id,
-                'photo_id'=>$user->photo_id
+                'photo_id'=>$user->photo_id,
+                'comment_id'=>$request->comment_id,
             ];
-            Comment::create($data);
-            Session::flash('postcomment_message', 'Message submitted and awaits moderation');
+            Reply::create($data);
+            Session::flash('reply_message', 'Reply Message submitted and awaits moderation');
         }
         return redirect()->back();
-
     }
 
     /**
@@ -86,14 +87,6 @@ class AdminPostCommentsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $comment = Comment::findOrFail($id);
-        if($request->is_active == 0){
-            $comment->is_active = 1;
-        }else{
-            $comment->is_active = 0;
-        }
-        $comment->update();
-        return redirect()->back();
     }
 
     /**
