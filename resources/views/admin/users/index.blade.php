@@ -40,7 +40,7 @@
                     <td>{{$user->id}}</td>
                     <td>
                         <img height="62"
-                             src="{{$user->photo ? asset($user->photo->file) : 'http://via.placeholder.com/62x62'}}"
+                             src="{{$user->photo ? asset('img/users') . $user->photo->file : 'http://via.placeholder.com/62x62'}}"
                              alt="{{$user->name}}">
                     </td>
                     <td>{{$user->name}}</td>

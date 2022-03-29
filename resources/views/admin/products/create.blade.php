@@ -1,21 +1,13 @@
 @extends('layouts.admin')
 @section('content')
     <div class="col-12">
-        <h1>Create Post</h1>
+        <h1>Create Product</h1>
         @include('includes.form_error')
-        <form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" class="form-control" placeholder="Title...">
-            </div>
-            <div class="form-group">
-                <label for="category">Category (CTRL + CLICK multiple select)</label>
-                <select name="categories[]" class="form-control custom-select" multiple>
-                    @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                </select>
+                <label for="name">Title</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Title...">
             </div>
             <div class="form-group">
                 <label for="keyword">Keyword (CTRL + CLICK multiple select)</label>
@@ -31,8 +23,8 @@
             <div class="form-group">
                 <input type="file" name="photo_id" id="ChooseFile">
             </div>
-            <button type="submit" class="btn btn-primary">Add post</button>
+            <button type="submit" class="btn btn-primary">Add product</button>
         </form>
     </div>
 
-    @endsection
+@endsection

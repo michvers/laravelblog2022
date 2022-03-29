@@ -143,6 +143,34 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
+               aria-expanded="true" aria-controls="collapseProducts">
+                <i class="fas fa-product"></i>
+                <span>Products</span>
+            </a>
+            <div id="collapseProducts" class="collapse" aria-labelledby="collapseProducts" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Product Pages:</h6>
+                    <a class="collapse-item" href="{{route('products.index')}}">All Products</a>
+                    <a class="collapse-item" href="{{route('products.create')}}">Create Product</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBrands"
+               aria-expanded="true" aria-controls="collapseBrands">
+                <i class="fas fa-product"></i>
+                <span>Brands</span>
+            </a>
+            <div id="collapseBrands" class="collapse" aria-labelledby="collapseBrands" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Product Pages:</h6>
+                    <a class="collapse-item" href="{{route('brands.index')}}">All Brands</a>
+                    <a class="collapse-item" href="{{route('brands.create')}}">Create Brand</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCommentReply"
                aria-expanded="true" aria-controls="collapseCommentReply">
                 <i class="fas fa-images"></i>

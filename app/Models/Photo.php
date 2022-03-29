@@ -10,7 +10,7 @@ class Photo extends Model
     use HasFactory;
 
     protected $fillable=['file'];
-    protected $uploads = '/img/';
+    protected $uploads = '/';
     //protected $guarded=['id'];
     //get{Attribute}Attribute
     public function getFileAttribute($photo){

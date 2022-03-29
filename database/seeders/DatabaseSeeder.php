@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             RepliesTableSeeder::class,
             TagsTableSeeder::class,
+            KeywordsTableseeder::class,
+            BrandsTableSeeder::class,
             //PostsCategoriesTableSeeder::class,
         ]);
     }

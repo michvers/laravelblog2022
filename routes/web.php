@@ -54,5 +54,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function (
     Route::resource('media', App\Http\Controllers\AdminMediasController::class);
     Route::resource('posts', App\Http\Controllers\AdminPostsController::class);
     Route::resource('categories', App\Http\Controllers\AdminPostsCategoriesController::class);
+    Route::resource('products', App\Http\Controllers\AdminProductsController::class);
+    Route::resource('brands', App\Http\Controllers\AdminBrandsController::class);
 
 });

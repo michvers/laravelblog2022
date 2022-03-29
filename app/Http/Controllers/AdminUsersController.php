@@ -84,7 +84,7 @@ class AdminUsersController extends Controller
                 })
                 ->crop(200, 200)
                 //->insert(public_path('/img/watermark.png'), 'bottom-right', 20, 20) /**met watermark**/
-                ->save(public_path('/img/' . $name));
+                ->save(public_path('img/users' . $name));
             //$file->move('img', $name);
             $photo = Photo::create(['file'=>$name]);
             $user->photo_id = $photo->id;
