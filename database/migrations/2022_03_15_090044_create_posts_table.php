@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('body');
+            $table->boolean('active')->default(0);
             $table->timestamps();
             //$table->softDeletes();
         });

@@ -29,6 +29,7 @@ class PostFactory extends Factory
             'title'=>$title,
             'slug' => $slug,
             'body'=>$this->faker->realText($maxNbChars=200, $indexSize=2),
+            'active'=>$this->faker->numberBetween($min=0, $max=1),
         ];
     }
 }

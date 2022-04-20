@@ -173,4 +173,9 @@ class AdminPostsController extends Controller
         $post->load(['postcomments.user']);
         return view('post', compact('post'));
     }
+
+    public function livewireindex()
+    {
+        return view('admin.posts.livewireindex');
+    }
 }

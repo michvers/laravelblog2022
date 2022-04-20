@@ -58,4 +58,5 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function (
     Route::resource('brands', App\Http\Controllers\AdminBrandsController::class);
     Route::resource('product/categories',App\Http\Controllers\AdminProductCategoryController::class);
     Route::get('products/brands/{id}', '\App\Http\Controllers\AdminProductsController@productsPerBrand')->name('admin.productsPerBrand');
+    Route::get('/livewireindex', [\App\Http\Controllers\AdminPostsController::class, 'livewireindex']);
 });
