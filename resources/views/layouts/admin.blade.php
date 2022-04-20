@@ -154,6 +154,11 @@
                     <a class="collapse-item" href="{{route('products.index')}}">All Products</a>
                     <a class="collapse-item" href="{{route('products.create')}}">Create Product</a>
                 </div>
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Product Pages:</h6>
+                    <a class="collapse-item" href="{{route('categories.index')}}">All Productcategories</a>
+                    <a class="collapse-item" href="{{route('categories.create')}}">Create Productcategory</a>
+                </div>
             </div>
         </li>
         <li class="nav-item">

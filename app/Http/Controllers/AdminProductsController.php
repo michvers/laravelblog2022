@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Keyword;
 use App\Models\Photo;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class AdminProductsController extends Controller
@@ -17,8 +19,10 @@ class AdminProductsController extends Controller
     public function index()
     {
         //
-        $products = Product::paginate(10);
-        return view('admin.products.index', compact('products'));
+        $products = Product::with(['brand', 'photo', 'keywords', 'productcategory'])->paginate(10);
+        $brands = Brand::all();
+
+        return view('admin.products.index', compact('products', 'brands'));
     }
 
     /**
@@ -29,8 +33,10 @@ class AdminProductsController extends Controller
     public function create()
     {
         //
-        $keywords = Keyword::all();
-        return view('admin.products.create', compact('keywords'));
+        $keywords= Keyword::all();
+        $productcategories = ProductCategory::all();
+        $brands = Brand::all();
+        return view('admin.products.create', compact('keywords','brands', 'productcategories'));
     }
 
     /**
@@ -42,10 +48,13 @@ class AdminProductsController extends Controller
     public function store(Request $request)
     {
         //
+
         $product = new Product();
         $product->name = $request->name;
         //$product->slug = Str::slug($product->name,'-');
         $product->body = $request->body;
+        $product->product_category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
         // $product->user_id = Auth::user()->id;
         /**photo opslaan**/
         if($file = $request->file('photo_id')){
@@ -116,5 +125,12 @@ class AdminProductsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function productsPerBrand($id)
+    {
+        $brands = Brand::all();
+        $products = Product::where('brand_id', $id)->paginate(10);
+        return view('admin.products.index', compact('products', 'brands'));
     }
 }

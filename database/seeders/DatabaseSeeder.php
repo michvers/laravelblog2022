@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             TagsTableSeeder::class,
             KeywordsTableseeder::class,
             BrandsTableSeeder::class,
+            ProductCategorySeeder::class,
             //PostsCategoriesTableSeeder::class,
         ]);
     }
