@@ -55,6 +55,7 @@ class AdminProductsController extends Controller
         $product->body = $request->body;
         $product->product_category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
+        $product->price = $request->price;
         // $product->user_id = Auth::user()->id;
         /**photo opslaan**/
         if($file = $request->file('photo_id')){

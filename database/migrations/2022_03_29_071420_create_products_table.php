@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_category_id')->index();
             $table->string('name');
             $table->text('body');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }

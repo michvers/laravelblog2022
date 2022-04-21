@@ -11,9 +11,11 @@ class Product extends Model
     protected $fillable = [
         'photo_id',
         'product_category_id',
+        'price',
         'brand_id',
         'name',
-        'body'
+        'body',
+
     ];
 
     public function keywords()
