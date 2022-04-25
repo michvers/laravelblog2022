@@ -66,4 +66,5 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'verified']], function (
     Route::resource('product/categories',App\Http\Controllers\AdminProductCategoryController::class);
     Route::get('products/brands/{id}', '\App\Http\Controllers\AdminProductsController@productsPerBrand')->name('admin.productsPerBrand');
     Route::get('/livewireindex', [\App\Http\Controllers\AdminPostsController::class, 'livewireindex']);
+    Route::post('best-reply/{reply}', 'App\Http\Controllers\AdminRepliesController@storeBestReply')->name('bestreply');
 });

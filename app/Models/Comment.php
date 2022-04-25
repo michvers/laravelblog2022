@@ -13,6 +13,7 @@ class Comment extends Model
         'photo_id',
         'user_id',
         'body',
+        'best_replies_id',
         'is_active'
     ];
 

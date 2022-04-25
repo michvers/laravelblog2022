@@ -84,7 +84,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="mb-3">
                         <label for="username">Username</label>
                         <div class="input-group">

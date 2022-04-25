@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -98,5 +99,14 @@ class AdminRepliesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function storeBestReply(Reply $reply)
+    {
+        $comment = Comment::find($reply->comment_id);
+        $this->authorize('update', $comment);
+        $reply->comment->best_replies_id = $reply->id;
+        $reply->comment->update();
+        return back();
     }
 }

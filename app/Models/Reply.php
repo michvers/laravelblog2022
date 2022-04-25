@@ -13,7 +13,7 @@ class Reply extends Model
         'comment_id',
         'user_id',
         'body',
-        'is_active'
+        'is_active',
     ];
     public function user(){
         return $this->belongsTo(User::class);

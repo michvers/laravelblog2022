@@ -106,4 +106,9 @@ class AdminPostCommentsController extends Controller
     {
         //
     }
+
+    public function setBestComment(Comment $postcomment)
+    {
+        $this->best_comment_id = $postcomment->id;
+    }
 }

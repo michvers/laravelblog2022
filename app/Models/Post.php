@@ -11,7 +11,7 @@ class Post extends Model
     use HasFactory;
     //use SoftDeletes;
     //protected $guarded=['id'];
-    protected $fillable=['photo_id', 'category_id', 'title','slug', 'body'];
+    protected $fillable=['photo_id', 'category_id', 'title','slug', 'body', 'best_comment_id'];
 
     public function user(){
         return $this->belongsTo(User::class);

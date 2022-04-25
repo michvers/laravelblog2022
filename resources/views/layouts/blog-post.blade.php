@@ -257,70 +257,94 @@
                         <!-- Single Comment Area -->
                         @foreach($post->postcomments as $postcomment)
                             @if($postcomment->is_active == 1)
-                        <li class="single_comment_area">
-                            <div class="comment-wrapper d-md-flex align-items-start">
-                                <!-- Comment Meta -->
-                                <div class="comment-author">
-                                    <img class="rounded-circle" src="{{$postcomment->user->photo ? $postcomment->user->file : 'http://via.placeholder.com/70x70'}}" alt="">
-                                </div>
-                                <!-- Comment Content -->
-                                <div class="comment-content">
-                                    <h5>{{$postcomment->user->name}}</h5>
-                                    <span class="comment-date font-pt">{{$postcomment->created_at->diffForHumans()}}</span>
-                                    <p>{{$postcomment->body}}</p>
-                                    <div id="accordion">
-                                        <a class="reply-btn" data-toggle="collapse" data-target="#collapse{{$postcomment->id}}" aria-expanded="false" aria-controls="collapse{{$postcomment->id}}" href="#">Reply <i class="fa fa-reply"
-                                                                               aria-hidden="true"></i></a>
-                                        <div id="collapse{{$postcomment->id}}" class="pr-3 pt-3 collapse">
-                                            @auth
-
-                                                @endauth
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            @foreach($postcomment->replies as $reply)
-                            <ol class="children">
                                 <li class="single_comment_area">
                                     <div class="comment-wrapper d-md-flex align-items-start">
                                         <!-- Comment Meta -->
                                         <div class="comment-author">
-                                            <img src="{{$reply->user->photo ? $reply->user->photo->file : 'http://via.placeholder.com/70x70'}}" alt="">
+                                            <img class="rounded-circle"
+                                                 src="{{$postcomment->user->photo ? $postcomment->user->file : 'http://via.placeholder.com/70x70'}}"
+                                                 alt="">
                                         </div>
                                         <!-- Comment Content -->
                                         <div class="comment-content">
-                                            <h5>{{$reply->user->name}}</h5>
-                                            <span class="comment-date text-muted">December 18, 2017</span>
-                                            <p>{{$reply->body}}</p>
-                                            <a class="reply-btn" href="#">Reply <i class="fa fa-reply"
-                                                                                   aria-hidden="true"></i></a>
+                                            <h5>{{$postcomment->user->name}}</h5>
+                                            <span
+                                                class="comment-date font-pt">{{$postcomment->created_at->diffForHumans()}}</span>
+                                            <p>{{$postcomment->body}}</p>
+
+                                            <div id="accordion">
+                                                <a class="reply-btn" data-toggle="collapse"
+                                                   data-target="#collapse{{$postcomment->id}}" aria-expanded="false"
+                                                   aria-controls="collapse{{$postcomment->id}}" href="#">Reply <i
+                                                        class="fa fa-reply"
+                                                        aria-hidden="true"></i></a>
+                                                <div id="collapse{{$postcomment->id}}" class="pr-3 pt-3 collapse">
+                                                    @auth
+
+                                                    @endauth
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    @foreach($postcomment->replies as $reply)
+                                        @can('update', $postcomment)
+                                            <ol class="children">
+                                                <li class="single_comment_area">
+                                                    @if($reply->id == $reply->comment->best_replies_id)
+                                                        <p class="badge badge-pill badge-info">Best Reply</p>
+                                                    @endif
+                                                    <div class="comment-wrapper d-md-flex align-items-start">
+                                                        <form method="POST" action="{{route('bestreply', $reply)}}">
+                                                            @csrf
+                                                            <button type="submit" class="btn text-muted p-0">Best Reply</button>
+                                                        </form>
+                                                        <!-- Comment Meta -->
+                                                        <div class="comment-author">
+
+                                                        </div>
+                                                        <!-- Comment Content -->
+                                                        <div class="comment-content">
+                                                            <h5>{{$reply->username}}</h5>
+                                                            <span
+                                                                class="comment-date text-muted">December 18, 2017</span>
+                                                            <p>{{$reply->body}}</p>
+                                                            <a class="reply-btn" href="#">Reply <i class="fa fa-reply"
+                                                                                                   aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        @endcan
+                                    @endforeach
+
+                                    <div class="leave-reply-area clearfix">
+                                        <div class="reply-form">
+                                            <div class="gazette-heading">
+                                                <h4 class="font-bold">leave a reply</h4>
+                                            </div>
+
+
+                                            <!-- Comment Form -->
+                                            <form action="{{route('replies.store')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="comment_id" value="{{$postcomment->id}}">
+                                                <div class="form-group">
+                                    <textarea class="form-control" name="body" id="body" cols="30" rows="10"
+                                              placeholder="Description"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn leave-comment-btn">SUBMIT <i
+                                                        class="fa fa-angle-right ml-2"></i></button>
+                                            </form>
+
+
                                         </div>
                                     </div>
                                 </li>
-                            </ol>
-                            @endforeach
-                            <div class="leave-reply-area clearfix">
-                                <div class="reply-form">
-                                    <div class="gazette-heading">
-                                        <h4 class="font-bold">leave a reply</h4>
-                                    </div>
-                                    <!-- Comment Form -->
-                                    <form action="{{route('replies.store')}}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="comment_id" value="{{$postcomment->id}}">
-                                        <div class="form-group">
-                                    <textarea class="form-control" name="body" id="body" cols="30" rows="10"
-                                              placeholder="Description"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn leave-comment-btn">SUBMIT <i
-                                                class="fa fa-angle-right ml-2"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
                             @endif
-                            @endforeach
+                        @endforeach
                     </ol>
                 </div>
                 <!-- Leave A Comment -->
