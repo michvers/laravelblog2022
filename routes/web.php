@@ -25,6 +25,7 @@ Route::get('/contactformulier', 'App\Http\Controllers\ContactController@create')
 Route::post('/contactformulier','App\Http\Controllers\ContactController@store');
 Route::get('/post/{post:slug}', 'App\Http\Controllers\AdminPostsController@post')->name('home.post');
 Route::get('/category/{category:slug}', 'App\Http\Controllers\AdminPostsCategoriesController@category')->name('category.category');
+
 Route::get('/shop', 'App\Http\Controllers\FrontendController@index')->name('shop');
 Route::get('/products/brand/{id}', 'App\Http\Controllers\FrontendController@productsPerBrand')->name('productsPerBrandf');
 Route::get('/addtocart/{id}', 'App\Http\Controllers\FrontendController@addToCart')->name('addToCart');
